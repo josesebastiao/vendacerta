@@ -326,31 +326,6 @@ button {
 }
 
 
-/* Efeito de surgimento suave */
-.resultados {
-    animation: fadeInUp 0.5s ease;
-}
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Deixar o Preço de Venda em destaque como no print */
-#resPreco {
-    font-size: 28px;
-    color: #0F2A44;
-    display: block;
-    margin-top: 5px;
-}
-
-.result-card.lucro {
-    background: #DCFCE7; /* Verde clarinho */
-    border-left: 5px solid #16A34A;
-}
-
-.result-card.lucro strong {
-    color: #15803d;
-}
 
 
