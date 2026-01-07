@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>VendaCerta | Calculadora Shopee</title>
 
   <link rel="stylesheet" href="css/style.css">
@@ -13,132 +12,71 @@
 
 <body>
 
-  <!-- ===== HERO / TÍTULO ===== -->
-  <section class="hero">
-    <h1 class="hero-title">Calcule o Preço Perfeito</h1>
-    <p>Calculadora para vendedores da Shopee</p>
-  </section>
+<section class="hero">
+  <h1 class="hero-title">Calcule o Preço Perfeito</h1>
+  <p>Calculadora para vendedores da Shopee</p>
+</section>
 
-  <!-- ===== TUTORIAL ===== -->
-  <section class="tutorial-wrapper">
-    <div class="tutorial-card">
-
-      <div class="tutorial-header">
-        <span class="badge">▶ Tutorial Completo em Vídeo</span>
-        <h3>Aprenda a usar o VendaCerta</h3>
-        <p>Evite vender no prejuízo com simulações reais.</p>
-      </div>
-
-      <div class="video-placeholder">
-        <span>📹 Vídeo tutorial em breve</span>
-      </div>
-
+<section class="tutorial-wrapper">
+  <div class="tutorial-card">
+    <div class="tutorial-header">
+      <span class="badge">▶ Tutorial Completo em Vídeo</span>
+      <h3>Aprenda a usar o VendaCerta</h3>
+      <p>Evite vender no prejuízo com simulações reais.</p>
     </div>
-  </section>
+    <div class="video-placeholder">📹 Vídeo tutorial em breve</div>
+  </div>
+</section>
 
-  <!-- ===== CALCULADORA ===== -->
-  <section class="calculator-wrapper">
+<section class="calculator-wrapper">
+  <div class="card">
 
-    <div class="card">
+    <div class="header">
+      <h2>VendaCerta</h2>
+      <span>Taxas Shopee: 20% + R$4,00</span>
+    </div>
 
-      <!-- HEADER DA CALCULADORA -->
-      <div class="header">
-        <h2>VendaCerta</h2>
-        <span>Taxas Shopee: 20% + R$4,00</span>
+    <div class="section">
+      <h2>💲 Dados do Produto</h2>
+      <div class="grid">
+        <input type="number" id="produto" placeholder="Custo do produto">
+        <input type="number" id="embalagem" placeholder="Custo da embalagem">
       </div>
+    </div>
 
-      <!-- DADOS DO PRODUTO -->
-      <div class="section">
-        <h2>💲 Dados do Produto</h2>
-        <small class="obg">● Campos Obrigatórios</small>
-
-        <div class="grid">
-          <div>
-            <label>Custo do Produto (R$) <span>*</span></label>
-            <input type="number" id="produto" placeholder="Ex: 4,50" required>
-          </div>
-
-          <div>
-            <label>Custo da Embalagem (R$) <span>*</span></label>
-            <input type="number" id="embalagem" placeholder="Ex: 0,80" required>
-          </div>
-        </div>
+    <div class="section">
+      <h2>📊 Como você quer calcular?</h2>
+      <div class="options">
+        <div class="option active" onclick="selectMode(this, 'margem')">Margem</div>
+        <div class="option" onclick="selectMode(this, 'preco')">Preço</div>
+        <div class="option" onclick="selectMode(this, 'lucro')">Lucro</div>
       </div>
+    </div>
 
-      <!-- MODO DE CÁLCULO -->
-      <div class="section">
-        <h2>📊 Como você quer calcular o preço?</h2>
+    <div class="section">
+      <label id="dynamicLabel">Margem de Lucro (%)</label>
+      <input type="number" id="dynamicInput">
+    </div>
 
-        <div class="options">
-          <div class="option active" onclick="selectMode('margem')">
-            <i class="fa-solid fa-arrow-trend-up"></i>
-            <strong>Pela Margem de Lucro</strong>
-            <span>Você define o lucro (%)</span>
-          </div>
+    <div class="section">
+      <input type="number" id="imposto" placeholder="Imposto (%)">
+      <input type="number" id="roas" placeholder="ROAS">
+    </div>
 
-          <div class="option" onclick="selectMode('preco')">
-            <i class="fa-solid fa-dollar-sign"></i>
-            <strong>Pelo Preço de Venda Final</strong>
-            <span>Você define o preço (R$)</span>
-          </div>
+    <button type="button" onclick="calcular()">CALCULAR PREÇO</button>
 
-          <div class="option" onclick="selectMode('lucro')">
-            <i class="fa-solid fa-bullseye"></i>
-            <strong>Pelo Lucro Desejado</strong>
-            <span>Você define o lucro (R$)</span>
-          </div>
-        </div>
-      </div>
+    <div class="resultados" id="resultado" style="display:none;">
+      <div class="result-card"><strong id="resPreco"></strong></div>
+      <div class="result-card"><strong id="resTaxas"></strong></div>
+      <div class="result-card lucro"><strong id="resLucro"></strong></div>
+      <div class="result-card ads"><strong id="resAds"></strong></div>
+      <div class="result-card ads"><strong id="resLucroAds"></strong></div>
+      <div class="alerta" id="alertaLucro">⚠️ Prejuízo</div>
+    </div>
 
-      <!-- CAMPO DINÂMICO -->
-      <div class="section">
-        <label id="dynamicLabel">Margem de Lucro Desejada (%) <span>*</span></label>
-        <input type="number" id="dynamicInput" placeholder="Ex: 30">
-      </div>
+  </div>
+</section>
 
-      <!-- OUTRAS CONFIGURAÇÕES -->
-      <div class="section">
-        <h2>⚙️ Outras Configurações</h2>
-
-        <div class="grid">
-          <div>
-            <label>Imposto (%)</label>
-            <input type="number" id="imposto" placeholder="Ex: 5">
-          </div>
-
-          <div>
-            <label>ROAS Desejado (Shopee Ads)</label>
-            <input type="number" id="roas" placeholder="Ex: 10">
-          </div>
-
-          <div>
-            <label>Preço Médio do Mercado (R$)</label>
-            <input type="number" id="precoMercado" placeholder="Ex: 52,90">
-          </div>
-
-          <div>
-            <label>Vendas Estimadas / Mês</label>
-            <input type="number" id="vendasMes" placeholder="Ex: 100">
-          </div>
-        </div>
-      </div>
-
-      <!-- ⚠️ BOTÃO CORRIGIDO -->
-      <button type="button" onclick="calcular()">CALCULAR PREÇO</button>
-
-      <!-- RESULTADOS -->
-      <div class="resultados" id="resultado" style="display:none;">
-
-        <div class="result-card">
-          <span>Preço de Venda</span>
-          <strong id="resPreco">R$ 0,00</strong>
-        </div>
-
-        <div class="result-card">
-          <span>Taxas Totais</span>
-          <strong id="resTaxas">R$ 0,00</strong>
-        </div>
-
-        <div class="result-card lucro">
-          <span>Lucro Líquido</span>
-          <strong id="resLucro">R$ 0,00
+<script src="js/script.js"></script>
+</body>
+</html>
