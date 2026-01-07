@@ -15,7 +15,7 @@
 
   <!-- ===== HERO / TÍTULO ===== -->
   <section class="hero">
-    <h1>Calcule o Preço Perfeito</h1>
+    <h1 class="hero-title">Calcule o Preço Perfeito</h1>
     <p>Calculadora para vendedores da Shopee</p>
   </section>
 
@@ -108,22 +108,23 @@
 
           <div>
             <label>ROAS Desejado (Shopee Ads)</label>
-            <input type="number" placeholder="Ex: 10">
+            <input type="number" id="roas" placeholder="Ex: 10">
           </div>
 
           <div>
             <label>Preço Médio do Mercado (R$)</label>
-            <input type="number" placeholder="Ex: 52,90">
+            <input type="number" id="precoMercado" placeholder="Ex: 52,90">
           </div>
 
           <div>
             <label>Vendas Estimadas / Mês</label>
-            <input type="number" placeholder="Ex: 100">
+            <input type="number" id="vendasMes" placeholder="Ex: 100">
           </div>
         </div>
       </div>
 
-      <button onclick="calcular()">CALCULAR PREÇO</button>
+      <!-- ⚠️ BOTÃO CORRIGIDO -->
+      <button type="button" onclick="calcular()">CALCULAR PREÇO</button>
 
       <!-- RESULTADOS -->
       <div class="resultados" id="resultado" style="display:none;">
@@ -140,29 +141,4 @@
 
         <div class="result-card lucro">
           <span>Lucro Líquido</span>
-          <strong id="resLucro">R$ 0,00</strong>
-        </div>
-
-        <div class="result-card ads">
-          <span>Custo com Shopee Ads / venda</span>
-          <strong id="resAds">R$ 0,00</strong>
-        </div>
-
-        <div class="result-card ads">
-          <span>Lucro após anúncios</span>
-          <strong id="resLucroAds">R$ 0,00</strong>
-        </div>
-
-        <div class="alerta" id="alertaLucro">
-          ⚠️ Atenção: você está tendo prejuízo nesta venda.
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <script src="js/script.js"></script>
-</body>
-</html>
+          <strong id="resLucro">R$ 0,00
