@@ -1,78 +1,110 @@
-function calcular() {
-  const produto = Number(produtoInput());
-  const embalagem = Number(document.getElementById("embalagem").value);
-  const margem = Number(document.getElementById("dynamicInput").value);
-  const imposto = Number(document.getElementById("imposto").value || 0) / 100;
-  const resultadoBox = document.getElementById("resultado");
-resultadoBox.style.display = "grid";
+let mode = "margem";
 
-requestAnimationFrame(() => {
-  resultadoBox.classList.add("show");
-});
-
-
-  if (!produto || !embalagem || !margem) {
-    alert("Preencha os campos obrigatórios");
-    return;
-  }
-
-  document.getElementById("loading").style.display = "block";
-  document.getElementById("resultado").style.display = "none";
-
-  setTimeout(() => {
-    const custo = produto + embalagem;
-    const lucro = custo * (margem / 100);
-    const preco = (custo + lucro + 4) / (1 - 0.20 - imposto);
-    const taxas = preco * 0.20 + 4;
-
-    document.getElementById("resPreco").innerText = `R$ ${preco.toFixed(2)}`;
-    document.getElementById("resLucro").innerText = `R$ ${lucro.toFixed(2)}`;
-    document.getElementById("badgeLucro").innerText = `Lucro Real: R$ ${lucro.toFixed(2)}`;
-
-    document.getElementById("dProduto").innerText = `R$ ${produto.toFixed(2)}`;
-    document.getElementById("dEmbalagem").innerText = `R$ ${embalagem.toFixed(2)}`;
-    document.getElementById("dTaxas").innerText = `R$ ${taxas.toFixed(2)}`;
-
-    document.getElementById("loading").style.display = "none";
-    document.getElementById("resultado").style.display = "block";
-
-    document.getElementById("alerta").style.display = lucro < 0 ? "block" : "none";
-  }, 900);
+/* =========================
+   FUNÇÃO AUXILIAR
+========================= */
+function formatMoney(value) {
+  return value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  });
 }
 
-function produtoInput() {
-  return document.getElementById("produto").value;
-}
-function easeOutExpo(x) {
-  return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
-}
-
-function animateValue(el, start, end, duration = 900) {
+/* =========================
+   ANIMAÇÃO DE NÚMEROS
+========================= */
+function animateValue(element, start, end, duration = 800) {
+  const range = end - start;
   let startTime = null;
 
-  function animate(timestamp) {
+  function step(timestamp) {
     if (!startTime) startTime = timestamp;
     const progress = Math.min((timestamp - startTime) / duration, 1);
-    const eased = easeOutExpo(progress);
-
-    const value = start + (end - start) * eased;
-    el.innerText = `R$ ${value.toFixed(2).replace('.', ',')}`;
+    const current = start + range * progress;
+    element.innerText = formatMoney(current);
 
     if (progress < 1) {
-      requestAnimationFrame(animate);
-    } else {
-      el.closest(".result-card")?.classList.add("pulse");
-      setTimeout(() => {
-        el.closest(".result-card")?.classList.remove("pulse");
-      }, 350);
+      requestAnimationFrame(step);
     }
   }
 
-  requestAnimationFrame(animate);
+  requestAnimationFrame(step);
 }
-animateValue(document.getElementById("resPreco"), 0, preco);
-animateValue(document.getElementById("resTaxas"), 0, taxas);
-animateValue(document.getElementById("resLucro"), 0, lucro);
 
-document.getElementById("badgeLucro").innerText =
-  `Lucro Real: R$ ${lucro.toFixed(2).replace('.', ',')} (${margem}%)`;
+/* =========================
+   CÁLCULO PRINCIPAL
+========================= */
+function calcular() {
+  const produto = parseFloat(document.getElementById("produto").value);
+  const embalagem = parseFloat(document.getElementById("embalagem").value);
+  const impostoPerc = parseFloat(document.getElementById("imposto").value) || 0;
+  const margem = parseFloat(document.getElementById("dynamicInput").value);
+  const roas = parseFloat(document.getElementById("roas").value) || 0;
+
+  if (!produto || !embalagem || !margem) {
+    alert("Preencha todos os campos obrigatórios.");
+    return;
+  }
+
+  /* ELEMENTOS */
+  const loading = document.getElementById("loading");
+  const resultado = document.getElementById("resultado");
+  const alerta = document.getElementById("alerta");
+
+  // RESET VISUAL
+  resultado.style.display = "none";
+  alerta.style.display = "none";
+  loading.style.display = "flex";
+
+  // SIMULA TEMPO DE CÁLCULO (UX PREMIUM)
+  setTimeout(() => {
+
+    /* CÁLCULOS */
+    const custoTotal = produto + embalagem;
+    const imposto = impostoPerc / 100;
+
+    const lucroDesejado = custoTotal * (margem / 100);
+    const precoVenda =
+      (custoTotal + lucroDesejado + 4) / (1 - 0.20 - imposto);
+
+    const taxaShopee = precoVenda * 0.20 + 4;
+    const impostoValor = precoVenda * imposto;
+    const taxasTotais = taxaShopee + impostoValor;
+    const lucroReal =
+      precoVenda - custoTotal - taxasTotais;
+
+    /* ESCONDE LOADING */
+    loading.style.display = "none";
+    resultado.style.display = "block";
+
+    /* ATUALIZA DETALHES */
+    document.getElementById("dProduto").innerText = formatMoney(produto);
+    document.getElementById("dEmbalagem").innerText = formatMoney(embalagem);
+    document.getElementById("dTaxas").innerText = formatMoney(taxasTotais);
+
+    /* ANIMA VALORES PRINCIPAIS */
+    animateValue(
+      document.getElementById("resPreco"),
+      0,
+      precoVenda
+    );
+
+    animateValue(
+      document.getElementById("resLucro"),
+      0,
+      lucroReal
+    );
+
+    animateValue(
+      document.getElementById("resLucroFinal"),
+      0,
+      lucroReal
+    );
+
+    /* ALERTA DE PREJUÍZO */
+    if (lucroReal < 0) {
+      alerta.style.display = "block";
+    }
+
+  }, 800); // tempo fake de cálculo
+}
