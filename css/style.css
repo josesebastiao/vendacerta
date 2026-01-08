@@ -333,3 +333,72 @@ button {
     padding: 30px 0;
   }
 }
+
+/* =========================
+   MOBILE APP EXPERIENCE
+========================= */
+@media (max-width: 768px) {
+
+  /* BOTÃO FIXO NO RODAPÉ */
+  .form-card button {
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    z-index: 100;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+  }
+
+  /* ESPAÇO PRA NÃO COBRIR CONTEÚDO */
+  .form-card {
+    padding-bottom: 90px;
+  }
+
+  /* RESULTADO ANIMADO */
+  #resultado {
+    animation: slideUp .5s ease forwards;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* LOADING CENTRALIZADO */
+  .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+  }
+
+  .spinner {
+    width: 42px;
+    height: 42px;
+    border: 4px solid #e5e7eb;
+    border-top: 4px solid #22c55e;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 12px;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* PREÇO MAIS IMPACTANTE */
+  .price-box h3 {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1px;
+  }
+
+}
