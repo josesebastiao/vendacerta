@@ -1,44 +1,38 @@
-let mode = "margem";
-
-function selectMode(el, m) {
-  mode = m;
-
-  document.querySelectorAll(".option").forEach(o => o.classList.remove("active"));
-  el.classList.add("active");
-
-  const label = document.getElementById("dynamicLabel");
-  const input = document.getElementById("dynamicInput");
-  input.value = "";
-
-  if (m === "margem") label.innerHTML = "Margem de Lucro (%)";
-  if (m === "preco") label.innerHTML = "Preço Final (R$)";
-  if (m === "lucro") label.innerHTML = "Lucro Desejado (R$)";
-}
-
 function calcular() {
-  const produto = parseFloat(produtoEl().value);
-  const embalagem = parseFloat(embalagemEl().value);
-  const valor = parseFloat(dynamicEl().value);
+  const produto = Number(produtoInput());
+  const embalagem = Number(document.getElementById("embalagem").value);
+  const margem = Number(document.getElementById("dynamicInput").value);
+  const imposto = Number(document.getElementById("imposto").value || 0) / 100;
 
-  if (!produto || !embalagem || !valor) {
+  if (!produto || !embalagem || !margem) {
     alert("Preencha os campos obrigatórios");
     return;
   }
 
-  const custo = produto + embalagem;
-  let preco = 0;
-  let lucro = 0;
+  document.getElementById("loading").style.display = "block";
+  document.getElementById("resultado").style.display = "none";
 
-  if (mode === "margem") {
-    lucro = custo * (valor / 100);
-    preco = (custo + lucro + 4) / 0.8;
-  }
+  setTimeout(() => {
+    const custo = produto + embalagem;
+    const lucro = custo * (margem / 100);
+    const preco = (custo + lucro + 4) / (1 - 0.20 - imposto);
+    const taxas = preco * 0.20 + 4;
 
-  document.getElementById("resultado").style.display = "block";
-  document.getElementById("resPreco").innerText = `R$ ${preco.toFixed(2)}`;
-  document.getElementById("resLucro").innerText = `R$ ${lucro.toFixed(2)}`;
+    document.getElementById("resPreco").innerText = `R$ ${preco.toFixed(2)}`;
+    document.getElementById("resLucro").innerText = `R$ ${lucro.toFixed(2)}`;
+    document.getElementById("badgeLucro").innerText = `Lucro Real: R$ ${lucro.toFixed(2)}`;
+
+    document.getElementById("dProduto").innerText = `R$ ${produto.toFixed(2)}`;
+    document.getElementById("dEmbalagem").innerText = `R$ ${embalagem.toFixed(2)}`;
+    document.getElementById("dTaxas").innerText = `R$ ${taxas.toFixed(2)}`;
+
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("resultado").style.display = "block";
+
+    document.getElementById("alerta").style.display = lucro < 0 ? "block" : "none";
+  }, 900);
 }
 
-const produtoEl = () => document.getElementById("produto");
-const embalagemEl = () => document.getElementById("embalagem");
-const dynamicEl = () => document.getElementById("dynamicInput");
+function produtoInput() {
+  return document.getElementById("produto").value;
+}
