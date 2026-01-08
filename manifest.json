@@ -1,11 +1,12 @@
 {
-  "name": "VendaCerta",
+  "name": "VendaCerta - Calculadora Shopee",
   "short_name": "VendaCerta",
+  "description": "Calcule o preço ideal para vender na Shopee sem prejuízo",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#22c55e",
-  "description": "Calculadora de preço para Shopee",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#16a34a",
   "icons": [
     {
       "src": "/icons/icon-192.png",

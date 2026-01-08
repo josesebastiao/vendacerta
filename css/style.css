@@ -414,3 +414,45 @@ button {
   color: #16a34a; /* verde padrão do app */
   font-weight: 600;
 }
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 16px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* MOBILE APP FEEL */
+@media (max-width: 768px) {
+
+  body {
+    background: #f3f4f6;
+    overscroll-behavior: none;
+  }
+
+  .page {
+    padding-bottom: 24px;
+  }
+
+  .calculator {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .card {
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+
+  button {
+    height: 56px;
+    font-size: 16px;
+    border-radius: 14px;
+  }
+
+  .price-box h3 {
+    font-size: 36px;
+  }
+}
