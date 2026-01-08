@@ -108,3 +108,4 @@ function calcular() {
 
   }, 800); // tempo fake de cálculo
 }
+
