@@ -94,3 +94,7 @@ function calcular() {
 
   }, 800); // delay “calculando…”
 }
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js");
+}
