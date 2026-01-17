@@ -128,27 +128,29 @@
   </style>
 </head>
 <body>
-
-  <div id="lockScreen">
-    <div class="glass-card">
-      <i class="fa-solid fa-calculator" style="font-size: 48px; color: #22c55e; margin-bottom: 20px;"></i>
-      <h1 style="margin: 0 0 10px 0; font-size: 2rem;">VendaCerta</h1>
-      <p style="color:#94a3b8; margin-bottom: 30px;">A ferramenta secreta dos vendedores de sucesso.</p>
-      
-      <a href="https://wa.me/5527999553035?text=Quero%20acessar%20o%20VendaCerta" target="_blank" class="btn-buy">
-        LIBERAR ACESSO <i class="fa-brands fa-whatsapp"></i>
-      </a>
-
-      <div class="features-grid">
-        <div class="feature-item"><i class="fa-solid fa-mobile-screen" style="color:#22c55e"></i> App Instalável</div>
-        <div class="feature-item"><i class="fa-solid fa-wifi" style="color:#22c55e"></i> Funciona Offline</div>
-        <div class="feature-item"><i class="fa-solid fa-lock" style="color:#22c55e"></i> Acesso Seguro</div>
-      </div>
-    </div>
-  </div>
+<div class="logo-area" style="margin-bottom: 20px;">
+  <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 10px 20px rgba(34,197,94,0.3));">
+    <rect width="100" height="100" rx="24" fill="#22c55e"/>
+    <path d="M25 65L40 50L55 65L75 40" stroke="#020617" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M70 40H75V46" stroke="#020617" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="30" cy="30" r="5" fill="#020617" fill-opacity="0.2"/>
+    <circle cx="70" cy="70" r="5" fill="#020617" fill-opacity="0.2"/>
+  </svg>
+</div>
 
   <div id="app">
-    <header><h2>Calculadora</h2></header>
+   <header style="display: flex; flex-direction: column; align-items: center; margin-bottom: 25px;">
+  <svg width="180" height="50" viewBox="0 0 180 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="5" width="40" height="40" rx="10" fill="#22c55e"/>
+    <path d="M10 28L16 22L22 28L30 18" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 18H30V20" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 35H28" stroke="white" stroke-width="2" stroke-linecap="round" stroke-opacity="0.5"/>
+    
+    <text x="50" y="32" font-family="'Inter', sans-serif" font-weight="800" font-size="22" fill="#0f172a">Venda<tspan fill="#22c55e">Certa</tspan></text>
+  </svg>
+  
+  <p style="color: #64748b; font-size: 0.9rem; margin-top: 5px;">Calculadora Premium</p>
+</header>
     <div class="card">
       <div class="platform-selector">
         <div class="p-btn active" onclick="setPlatform('shopee')" data-platform="shopee">
