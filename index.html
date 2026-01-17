@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>VendaCerta</title>
+  <title>VendaCerta 2026 | Precificação Exata</title>
   
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#020617">
@@ -31,7 +31,7 @@
     }
     input, select, textarea { user-select: text; }
 
-    /* ================= TELA DE VENDAS (LANDING PAGE) ================= */
+    /* ================= TELA DE VENDAS (2026 PRO) ================= */
     #lockScreen {
       display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
       min-height: 100vh;
@@ -42,39 +42,34 @@
 
     .sales-container {
       width: 100%; max-width: 480px; text-align: center;
-      padding-top: 20px; padding-bottom: 40px;
+      padding-top: 30px; padding-bottom: 40px;
     }
 
-    /* Logo Animado */
     .hero-logo { margin-bottom: 20px; animation: float 3s ease-in-out infinite; }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-    /* Textos de Impacto */
     .headline {
       font-size: 2rem; font-weight: 800; line-height: 1.1; margin-bottom: 10px;
-      background: linear-gradient(to right, #ffffff, #86efac);
+      background: linear-gradient(to right, #ffffff, #4ade80);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    .subheadline { color: #94a3b8; font-size: 1.1rem; margin-bottom: 30px; line-height: 1.5; }
+    .subheadline { color: #94a3b8; font-size: 1.05rem; margin-bottom: 30px; line-height: 1.5; }
 
-    /* Card de Dores vs Solução */
     .pain-card {
       background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 20px; padding: 20px; margin-bottom: 30px; text-align: left;
+      border-radius: 20px; padding: 24px; margin-bottom: 30px; text-align: left;
     }
-    .pain-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.95rem; color: #cbd5e1; }
-    .pain-item i { width: 20px; text-align: center; }
-    .check-green { color: #22c55e; }
-    .cross-red { color: #ef4444; }
+    .pain-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 0.95rem; color: #e2e8f0; }
+    .check-green { color: #22c55e; font-size: 1.1rem; }
+    .cross-red { color: #ef4444; font-size: 1.1rem; }
 
-    /* Botão CTA Pulsante */
     .btn-buy {
       display: flex; align-items: center; justify-content: center; gap: 10px;
       background: var(--primary); color: #020617;
       padding: 18px; border-radius: 16px;
-      font-weight: 800; text-decoration: none; font-size: 1.2rem;
+      font-weight: 800; text-decoration: none; font-size: 1.15rem;
       width: 100%; margin-bottom: 15px;
-      box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+      box-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
       animation: pulse 2s infinite;
       transition: transform 0.2s;
     }
@@ -87,15 +82,13 @@
     
     .guarantee { font-size: 0.8rem; color: #64748b; margin-bottom: 40px; display: block; }
 
-    /* Grid de Funcionalidades */
-    .features-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: white; }
     .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .feature-box {
-      background: rgba(30, 41, 59, 0.6); padding: 15px; border-radius: 12px;
+      background: rgba(30, 41, 59, 0.6); padding: 16px; border-radius: 16px;
       text-align: center; border: 1px solid rgba(255,255,255,0.05);
     }
-    .feature-box i { font-size: 1.5rem; color: var(--primary); margin-bottom: 8px; }
-    .feature-box h4 { margin: 0; font-size: 0.9rem; color: #f1f5f9; }
+    .feature-box i { font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; }
+    .feature-box h4 { margin: 0; font-size: 0.95rem; color: #f1f5f9; font-weight: 700; }
     .feature-box p { margin: 4px 0 0 0; font-size: 0.75rem; color: #94a3b8; }
 
     /* ================= APP PRINCIPAL ================= */
@@ -150,48 +143,48 @@
         </svg>
       </div>
 
-      <h1 class="headline">Pare de vender<br>sem ver a cor<br>do dinheiro.</h1>
-      <p class="subheadline">A calculadora automática para Shopee, Mercado Livre e Amazon. Saiba seu lucro real antes de anunciar.</p>
+      <h1 class="headline">Sua precificação<br>está correta para<br>2026?</h1>
+      <p class="subheadline">Evite prejuízos ocultos. Use a única calculadora com as novas tarifas da Shopee e Mercado Livre.</p>
 
       <div class="pain-card">
-        <div class="pain-item"><i class="fa-solid fa-xmark cross-red"></i> Adeus planilhas confusas</div>
-        <div class="pain-item"><i class="fa-solid fa-xmark cross-red"></i> Chega de prejuízo com frete</div>
-        <div class="pain-item"><i class="fa-solid fa-check check-green"></i> <strong>Taxas 2025 Atualizadas</strong></div>
-        <div class="pain-item"><i class="fa-solid fa-check check-green"></i> <strong>Cálculo Reverso de Preço</strong></div>
+        <div class="pain-item"><i class="fa-solid fa-triangle-exclamation cross-red"></i> Tarifa Fixa Shopee R$4,00</div>
+        <div class="pain-item"><i class="fa-solid fa-triangle-exclamation cross-red"></i> ML: Nova Taxa Escalonada</div>
+        <div class="pain-item"><i class="fa-solid fa-check-circle check-green"></i> <strong>Algoritmo de Lucro Real</strong></div>
+        <div class="pain-item"><i class="fa-solid fa-check-circle check-green"></i> <strong>Simulador Reverso Preciso</strong></div>
       </div>
 
-      <a href="https://wa.me/5527999553035?text=Olá,%20vi%20o%20VendaCerta%20e%20quero%20liberar%20meu%20acesso!" 
+      <a href="https://wa.me/5527999553035?text=Quero%20acessar%20a%20Calculadora%20PRO%202026" 
          target="_blank" class="btn-buy">
          QUERO ACESSAR AGORA <i class="fa-brands fa-whatsapp"></i>
       </a>
-      <span class="guarantee"><i class="fa-solid fa-shield-halved"></i> Compra segura e acesso imediato</span>
+      <span class="guarantee"><i class="fa-solid fa-shield-halved"></i> Acesso imediato e vitalício</span>
 
-      <h3 class="features-title">Tudo o que você precisa:</h3>
+      <div style="text-align: left; margin-bottom: 15px; color: white; font-weight: 700;">Funcionalidades PRO:</div>
       <div class="features-grid">
         <div class="feature-box">
-          <i class="fa-solid fa-store"></i>
-          <h4>Multi-Plataforma</h4>
-          <p>Shopee, ML, Amazon, Magalu</p>
+          <i class="fa-solid fa-bag-shopping"></i>
+          <h4>Shopee 2026</h4>
+          <p>Taxa R$4,00 atualizada</p>
         </div>
         <div class="feature-box">
-          <i class="fa-solid fa-sack-dollar"></i>
-          <h4>Lucro Líquido</h4>
-          <p>Desconta impostos e taxas</p>
+          <i class="fa-solid fa-handshake"></i>
+          <h4>ML Inteligente</h4>
+          <p>Detecta taxa por preço</p>
         </div>
         <div class="feature-box">
-          <i class="fa-solid fa-truck-fast"></i>
-          <h4>Simulador ML</h4>
-          <p>Alerta de Frete > R$79</p>
+          <i class="fa-solid fa-calculator"></i>
+          <h4>Cálculo Reverso</h4>
+          <p>Você põe o lucro, nós damos o preço</p>
         </div>
         <div class="feature-box">
           <i class="fa-solid fa-mobile-screen"></i>
-          <h4>App Nativo</h4>
-          <p>Instale no seu celular</p>
+          <h4>App Offline</h4>
+          <p>Funciona sem internet</p>
         </div>
       </div>
 
-      <footer style="margin-top: 40px; color: #475569; font-size: 0.8rem;">
-        <p>&copy; 2025 VendaCerta. Todos os direitos reservados.</p>
+      <footer style="margin-top: 40px; color: #64748b; font-size: 0.8rem;">
+        <p>&copy; 2026 VendaCerta. Todos os direitos reservados.</p>
       </footer>
     </div>
   </div>
@@ -247,7 +240,7 @@
         </div>
       </div>
 
-      <button class="btn-calc" onclick="calcular()">CALCULAR</button>
+      <button class="btn-calc" onclick="calcular()">CALCULAR PREÇO 2026</button>
 
       <div id="results">
         <div style="text-align: center; margin-bottom: 20px;">
@@ -271,27 +264,42 @@
       <small>Clique no link para copiar</small>
     </div>
 
-    <footer style="text-align: center; margin-top: 40px; color: #94a3b8; font-size: 0.8rem;">VendaCerta Mobile v4.0</footer>
+    <footer style="text-align: center; margin-top: 40px; color: #94a3b8; font-size: 0.8rem;">VendaCerta Mobile v5.0 (2026)</footer>
   </div>
 
   <script>
-    // === SERVICE WORKER ===
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .catch(err => console.log('SW falhou:', err));
+        navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW erro:', err));
       });
     }
 
-    // === CONFIGURAÇÃO ===
-    const FEES={shopee:{padrao:{comm:14,fixed:3},frete_gratis:{comm:20,fixed:3}},ml:{classico:{comm:11.5,fixed:6},premium:{comm:16.5,fixed:6}},amazon:{individual:{comm:15,fixed:2},profissional:{comm:15,fixed:0}},magalu:{padrao:{comm:16,fixed:3}}};
-    const VALID_TOKENS=["ADMIN","LIBERADO123","CLIENTEVIP","TESTE"];
+    // === CONFIGURAÇÃO 2026 OFICIAL ===
+    const FEES = {
+      shopee: {
+        // ATUALIZAÇÃO 2026: Taxa fixa subiu de R$3 para R$4
+        padrao: { comm: 14, fixed: 4.00 },
+        frete_gratis: { comm: 20, fixed: 4.00 }
+      },
+      ml: {
+        // ML tem taxa variável por preço. Configuramos no cálculo dinâmico.
+        classico: { comm: 11.5, fixed: 0 }, 
+        premium: { comm: 16.5, fixed: 0 }
+      },
+      amazon: {
+        individual: { comm: 15, fixed: 2.00 },
+        profissional: { comm: 15, fixed: 0.00 }
+      },
+      magalu: {
+        padrao: { comm: 16, fixed: 3.00 }
+      }
+    };
     
-    let currentPlatform='shopee';
-    const urlParams=new URLSearchParams(window.location.search);
-    const userToken=urlParams.get('token');
+    const VALID_TOKENS = ["ADMIN", "LIBERADO123", "CLIENTEVIP"];
+    let currentPlatform = 'shopee';
+    const urlParams = new URLSearchParams(window.location.search);
+    const userToken = urlParams.get('token');
 
-    // === LÓGICA DE ACESSO ===
     if(userToken==='ADMIN'){
       document.getElementById('lockScreen').style.display='none';
       document.getElementById('app').style.display='block';
@@ -300,20 +308,18 @@
     } else if(VALID_TOKENS.includes(userToken)){
       document.getElementById('lockScreen').style.display='none';
       document.getElementById('app').style.display='block';
-    } else {
-      // Mantém na tela de vendas (lockScreen)
     }
 
     function setPlatform(p){
-      currentPlatform=p;
+      currentPlatform = p;
       document.querySelectorAll('.p-btn').forEach(b=>b.classList.remove('active'));
       document.querySelector(`.p-btn[data-platform="${p}"]`).classList.add('active');
-      const opts=document.getElementById('dynamicOptions');
-      const frete=document.getElementById('freteContainer');
+      const opts = document.getElementById('dynamicOptions');
+      const frete = document.getElementById('freteContainer');
       opts.innerHTML=''; frete.style.display='none';
       
       if(p==='shopee'){
-        opts.innerHTML=`<select id="subOption"><option value="padrao">Padrão (14% + R$3)</option><option value="frete_gratis">Frete Grátis (20% + R$3)</option></select>`;
+        opts.innerHTML=`<select id="subOption"><option value="padrao">Padrão (14% + R$4)</option><option value="frete_gratis">Frete Grátis (20% + R$4)</option></select>`;
       } else if(p==='ml'){
         opts.innerHTML=`<select id="subOption"><option value="classico">Clássico (~11.5%)</option><option value="premium">Premium (~16.5%)</option></select>`;
         frete.style.display='block';
@@ -323,54 +329,122 @@
     }
 
     function calcular(){
-      const custo=parseFloat(document.getElementById('custo').value);
-      const margem=parseFloat(document.getElementById('margem').value);
-      const imposto=parseFloat(document.getElementById('imposto').value)||0;
-      if(!custo||!margem) return alert("Preencha Custo e Margem");
+      const custo = parseFloat(document.getElementById('custo').value);
+      const margem = parseFloat(document.getElementById('margem').value);
+      const imposto = parseFloat(document.getElementById('imposto').value) || 0;
       
-      let sub=document.getElementById('subOption')?document.getElementById('subOption').value:'padrao';
-      let comm=0, fixed=0, fSeller=0;
+      if(!custo || !margem) return alert("Preencha Custo e Margem");
       
-      if(currentPlatform==='shopee'){comm=FEES.shopee[sub].comm;fixed=FEES.shopee[sub].fixed;}
-      else if(currentPlatform==='ml'){
-        comm=FEES.ml[sub].comm;
-        const fInput=parseFloat(document.getElementById('frete').value)||0;
-        if(fInput>0){fSeller=fInput;fixed=0;}else{fixed=FEES.ml[sub].fixed;}
+      let sub = document.getElementById('subOption') ? document.getElementById('subOption').value : 'padrao';
+      let comm = 0, fixed = 0, fSeller = 0;
+      
+      // === LÓGICA DE PRECISÃO 2026 ===
+      
+      if(currentPlatform === 'shopee') {
+        comm = FEES.shopee[sub].comm;
+        fixed = FEES.shopee[sub].fixed; // Agora R$ 4.00
       }
-      else if(currentPlatform==='amazon'){comm=FEES.amazon[sub].comm;fixed=FEES.amazon[sub].fixed;}
-      else if(currentPlatform==='magalu'){comm=FEES.magalu.padrao.comm;fixed=FEES.magalu.padrao.fixed;}
+      else if(currentPlatform === 'amazon') {
+        comm = FEES.amazon[sub].comm;
+        fixed = FEES.amazon[sub].fixed;
+      }
+      else if(currentPlatform === 'magalu') {
+        comm = FEES.magalu.padrao.comm;
+        fixed = FEES.magalu.padrao.fixed;
+      }
+      else if(currentPlatform === 'ml') {
+        comm = FEES.ml[sub].comm;
+        // Lógica ML 2026: Preço < 29 (6.25), < 50 (6.50), < 79 (6.75)
+        // Como o preço final depende da taxa, fazemos uma estimativa reversa iterativa.
+        
+        const fInput = parseFloat(document.getElementById('frete').value) || 0;
+        
+        if(fInput > 0) {
+          // Se usuário botou frete, é pq espera > 79
+          fSeller = fInput;
+          fixed = 0;
+        } else {
+          // Estimativa inicial com a taxa mais alta (Pior cenário)
+          fixed = 6.75; 
+        }
+      }
 
-      const num=custo+(custo*(margem/100))+fixed+fSeller;
-      const div=1-((comm+imposto)/100);
-      if(div<=0) return alert("Taxas muito altas");
+      // Cálculo Base
+      let numerador = custo + (custo * (margem / 100)) + fixed + fSeller;
+      let divisor = 1 - ((comm + imposto) / 100);
       
-      const preco=num/div;
-      const tax=preco*(comm/100)+fixed+fSeller;
-      const taxImp=preco*(imposto/100);
-      const lucro=preco-custo-tax-taxImp;
+      if(divisor <= 0) return alert("Taxas excedem 100%");
+      
+      let preco = numerador / divisor;
 
-      document.getElementById('resPreco').innerText=preco.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-      document.getElementById('badgeLucro').innerText=`Lucro: ${lucro.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}`;
-      document.getElementById('badgeLucro').style.background=lucro>0?'#dcfce7':'#fee2e2';
-      document.getElementById('badgeLucro').style.color=lucro>0?'#166534':'#991b1b';
+      // === REFINAMENTO ML (Ajuste fino da taxa fixa 2026) ===
+      if(currentPlatform === 'ml' && fSeller === 0) {
+        // Se o preço calculado caiu numa faixa menor, ajustamos a taxa e recalculamos
+        if(preco < 29) {
+          fixed = 6.25;
+        } else if(preco < 50) {
+          fixed = 6.50;
+        } else if(preco < 79) {
+          fixed = 6.75;
+        } else {
+          // Passou de 79, o frete vira obrigatório
+          fixed = 0;
+          // Aqui idealmente pediríamos o frete, mas para não quebrar o cálculo:
+          alert("Atenção: O preço sugerido passou de R$ 79. No Mercado Livre, você precisará pagar o frete grátis. Adicione o valor do frete no campo para corrigir o cálculo.");
+        }
+        // Recalcular com a taxa exata da faixa
+        numerador = custo + (custo * (margem / 100)) + fixed + fSeller;
+        preco = numerador / divisor;
+      }
+
+      // === REFINAMENTO AMAZON (Comissão Mínima R$ 1.00) ===
+      let valorComissao = preco * (comm / 100);
+      if(currentPlatform === 'amazon' && valorComissao < 1.00) {
+        valorComissao = 1.00;
+        // Recalcula preço considerando que a comissão virou um custo fixo de R$1
+        // Novo Numerador = Custo + Lucro + Fixed + Frete + 1.00 (Comissão Fixa)
+        // Novo Divisor = 1 - (Imposto / 100) -> Tiramos a comissão % da equação
+        const divisorSemComm = 1 - (imposto / 100);
+        numerador = custo + (custo * (margem / 100)) + fixed + fSeller + 1.00;
+        preco = numerador / divisorSemComm;
+      }
+
+      // Detalhamento Final
+      const taxTotal = (currentPlatform === 'amazon' && valorComissao === 1.00) 
+                       ? (1.00 + fixed + fSeller) 
+                       : (preco * (comm / 100) + fixed + fSeller);
+                       
+      const taxImp = preco * (imposto / 100);
+      const lucro = preco - custo - taxTotal - taxImp;
+
+      document.getElementById('resPreco').innerText = preco.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+      document.getElementById('badgeLucro').innerText = `Lucro: ${lucro.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}`;
+      document.getElementById('badgeLucro').className = lucro > 0 ? '' : 'negative'; // Adicionar classe CSS se precisar
+      document.getElementById('badgeLucro').style.background = lucro > 0 ? '#dcfce7' : '#fee2e2';
+      document.getElementById('badgeLucro').style.color = lucro > 0 ? '#166534' : '#991b1b';
       
-      document.getElementById('resTaxas').innerText=tax.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-      document.getElementById('resImposto').innerText=taxImp.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-      document.getElementById('resCusto').innerText=custo.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+      document.getElementById('resTaxas').innerText = taxTotal.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+      document.getElementById('resImposto').innerText = taxImp.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+      document.getElementById('resCusto').innerText = custo.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
       
-      const rf=document.getElementById('rowFrete');
-      if(fSeller>0){rf.style.display='flex';document.getElementById('resFrete').innerText=fSeller.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});}
-      else{rf.style.display='none';}
+      const rf = document.getElementById('rowFrete');
+      if(fSeller > 0){
+        rf.style.display='flex';
+        document.getElementById('resFrete').innerText=fSeller.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+      } else {
+        rf.style.display='none';
+      }
       
       document.getElementById('results').style.display='block';
     }
 
     function generateLink(){
-      const n=document.getElementById('tokenName').value.trim().toUpperCase()||"CLIENTE";
-      document.getElementById('finalLink').value=`${window.location.href.split('?')[0]}?token=${n}`;
+      const n = document.getElementById('tokenName').value.trim().toUpperCase() || "CLIENTE";
+      const baseUrl = window.location.href.split('?')[0];
+      document.getElementById('finalLink').value = `${baseUrl}?token=${n}`;
     }
     function copyLink(){
-      const c=document.getElementById('finalLink');
+      const c = document.getElementById('finalLink');
       c.select(); navigator.clipboard.writeText(c.value); alert("Link copiado!");
     }
 
