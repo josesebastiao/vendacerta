@@ -151,7 +151,7 @@
     }
     #rulesCard h4 { margin: 0 0 8px 0; color: #1e293b; font-size: 0.9rem; }
     #rulesCard ul { padding-left: 20px; margin: 0; line-height: 1.5; }
-    #rulesCard li { margin-bottom: 6px; }
+    #rulesCard li { margin-bottom: 8px; }
 
     #results { display: none; margin-top: 25px; border-top: 2px dashed #e2e8f0; padding-top: 25px; animation: slideUp 0.4s ease; }
     
@@ -272,21 +272,22 @@
       <button class="btn-calc" onclick="calcular()">CALCULAR PREÇO 2026</button>
 
       <div class="info-toggle" onclick="toggleRules()">
-        <i class="fa-solid fa-circle-question"></i> Entenda o cálculo
+        <i class="fa-solid fa-circle-question"></i> Entenda o cálculo 2026
       </div>
       
       <div id="rulesCard">
         <div id="defaultRules">
-          <h4><i class="fa-solid fa-check-double" style="color:#22c55e"></i> Taxas Padrão 2026:</h4>
+          <h4><i class="fa-solid fa-check-double" style="color:#22c55e"></i> Regras Atualizadas Aplicadas:</h4>
           <ul>
-            <li><strong>Shopee:</strong> Taxa fixa <b>R$ 4,00</b>.</li>
-            <li><strong>Mercado Livre:</strong> Tarifa dinâmica inteligente.</li>
-            <li><strong>Amazon:</strong> Mínimo R$ 1,00.</li>
+            <li><strong>Shopee:</strong> Taxa fixa ajustada para <b>R$ 4,00</b> por item (Regra Oficial 2026).</li>
+            <li><strong>Mercado Livre:</strong> Tarifa dinâmica inteligente (R$ 6,25 / R$ 6,50 / R$ 6,75) conforme faixa de preço.</li>
+            <li><strong>Amazon:</strong> Proteção contra prejuízo (Comissão mínima fixada em R$ 1,00).</li>
+            <li><strong>Lucro Real:</strong> O lucro é calculado sobre o custo, garantindo dinheiro limpo no seu bolso.</li>
           </ul>
         </div>
         <div id="customRules" style="display:none; color: #d97706;">
           <h4><i class="fa-solid fa-triangle-exclamation"></i> Modo Personalizado:</h4>
-          <p>Você definiu as taxas manualmente. O sistema ignorou as regras padrão da plataforma.</p>
+          <p>Você definiu as taxas manualmente (Comissão + Fixo). O sistema ignorou as regras padrão da plataforma, mas manteve o cálculo de impostos.</p>
         </div>
       </div>
 
@@ -360,7 +361,7 @@
       if (isCustom) {
         customContainer.style.display = 'grid';
         platformOptions.style.opacity = '0.5'; 
-        platformOptions.style.pointerEvents = 'none'; // Desabilita clique
+        platformOptions.style.pointerEvents = 'none';
         defaultRules.style.display = 'none';
         customRules.style.display = 'block';
       } else {
@@ -463,7 +464,6 @@
       }
 
       // Detalhamento Final
-      // Se for personalizado, o taxTotal é simples. Se for padrão, pode ter o ajuste da Amazon.
       let taxTotal;
       if (!isCustom && currentPlatform === 'amazon' && (preco * (comm / 100)) < 1.00) {
           taxTotal = 1.00 + fixed + fSeller;
