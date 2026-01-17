@@ -123,7 +123,24 @@
       margin-top: 15px; cursor: pointer;
     }
 
-    #results { display: none; margin-top: 30px; border-top: 2px dashed #e2e8f0; padding-top: 30px; animation: slideUp 0.4s ease; }
+    /* ESTILO DA EXPLICAÇÃO DAS TAXAS */
+    .info-toggle {
+      text-align: center; margin-top: 15px; cursor: pointer; 
+      color: #64748b; font-size: 0.85rem; font-weight: 600;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .info-toggle:hover { color: var(--primary); }
+    
+    #rulesCard {
+      display: none; background: #f8fafc; padding: 16px; 
+      border-radius: 12px; margin-top: 15px; border: 1px solid #e2e8f0;
+      font-size: 0.85rem; color: #475569;
+    }
+    #rulesCard h4 { margin: 0 0 8px 0; color: #1e293b; font-size: 0.9rem; }
+    #rulesCard ul { padding-left: 20px; margin: 0; line-height: 1.5; }
+    #rulesCard li { margin-bottom: 6px; }
+
+    #results { display: none; margin-top: 25px; border-top: 2px dashed #e2e8f0; padding-top: 25px; animation: slideUp 0.4s ease; }
     
     #adminPanel { margin-top: 40px; padding: 20px; background: #fff; border-radius: 16px; border: 2px dashed #cbd5e1; }
     
@@ -242,6 +259,20 @@
 
       <button class="btn-calc" onclick="calcular()">CALCULAR PREÇO 2026</button>
 
+      <div class="info-toggle" onclick="toggleRules()">
+        <i class="fa-solid fa-circle-question"></i> Entenda o cálculo 2026
+      </div>
+      
+      <div id="rulesCard">
+        <h4><i class="fa-solid fa-check-double" style="color:#22c55e"></i> Regras Atualizadas Aplicadas:</h4>
+        <ul>
+          <li><strong>Shopee:</strong> Taxa fixa ajustada para <b>R$ 4,00</b> por item vendido (Regra 2025/26).</li>
+          <li><strong>Mercado Livre:</strong> Tarifa dinâmica inteligente (R$ 6,25 / R$ 6,50 / R$ 6,75) conforme faixa de preço.</li>
+          <li><strong>Amazon:</strong> Proteção contra prejuízo (Comissão mínima fixada em R$ 1,00).</li>
+          <li><strong>Lucro Real:</strong> O lucro é calculado sobre o custo, garantindo dinheiro limpo no bolso.</li>
+        </ul>
+      </div>
+
       <div id="results">
         <div style="text-align: center; margin-bottom: 20px;">
           <small style="color:#64748b">Venda por este preço:</small>
@@ -278,23 +309,10 @@
 
     // === CONFIGURAÇÃO 2026 OFICIAL ===
     const FEES = {
-      shopee: {
-        // ATUALIZAÇÃO 2026: Taxa fixa subiu de R$3 para R$4
-        padrao: { comm: 14, fixed: 4.00 },
-        frete_gratis: { comm: 20, fixed: 4.00 }
-      },
-      ml: {
-        // ML tem taxa variável por preço. Configuramos no cálculo dinâmico.
-        classico: { comm: 11.5, fixed: 0 }, 
-        premium: { comm: 16.5, fixed: 0 }
-      },
-      amazon: {
-        individual: { comm: 15, fixed: 2.00 },
-        profissional: { comm: 15, fixed: 0.00 }
-      },
-      magalu: {
-        padrao: { comm: 16, fixed: 3.00 }
-      }
+      shopee: { padrao: { comm: 14, fixed: 4.00 }, frete_gratis: { comm: 20, fixed: 4.00 } },
+      ml: { classico: { comm: 11.5, fixed: 0 }, premium: { comm: 16.5, fixed: 0 } },
+      amazon: { individual: { comm: 15, fixed: 2.00 }, profissional: { comm: 15, fixed: 0.00 } },
+      magalu: { padrao: { comm: 16, fixed: 3.00 } }
     };
     
     const VALID_TOKENS = ["ADMIN", "LIBERADO123", "CLIENTEVIP"];
@@ -310,6 +328,11 @@
     } else if(VALID_TOKENS.includes(userToken)){
       document.getElementById('lockScreen').style.display='none';
       document.getElementById('app').style.display='block';
+    }
+
+    function toggleRules() {
+      const card = document.getElementById('rulesCard');
+      card.style.display = (card.style.display === 'none' || card.style.display === '') ? 'block' : 'none';
     }
 
     function setPlatform(p){
@@ -340,11 +363,9 @@
       let sub = document.getElementById('subOption') ? document.getElementById('subOption').value : 'padrao';
       let comm = 0, fixed = 0, fSeller = 0;
       
-      // === LÓGICA DE PRECISÃO 2026 ===
-      
       if(currentPlatform === 'shopee') {
         comm = FEES.shopee[sub].comm;
-        fixed = FEES.shopee[sub].fixed; // Agora R$ 4.00
+        fixed = FEES.shopee[sub].fixed; 
       }
       else if(currentPlatform === 'amazon') {
         comm = FEES.amazon[sub].comm;
@@ -356,72 +377,40 @@
       }
       else if(currentPlatform === 'ml') {
         comm = FEES.ml[sub].comm;
-        // Lógica ML 2026: Preço < 29 (6.25), < 50 (6.50), < 79 (6.75)
-        // Como o preço final depende da taxa, fazemos uma estimativa reversa iterativa.
-        
         const fInput = parseFloat(document.getElementById('frete').value) || 0;
-        
-        if(fInput > 0) {
-          // Se usuário botou frete, é pq espera > 79
-          fSeller = fInput;
-          fixed = 0;
-        } else {
-          // Estimativa inicial com a taxa mais alta (Pior cenário)
-          fixed = 6.75; 
-        }
+        if(fInput > 0) { fSeller = fInput; fixed = 0; } else { fixed = 6.75; }
       }
 
-      // Cálculo Base
       let numerador = custo + (custo * (margem / 100)) + fixed + fSeller;
       let divisor = 1 - ((comm + imposto) / 100);
       
       if(divisor <= 0) return alert("Taxas excedem 100%");
-      
       let preco = numerador / divisor;
 
-      // === REFINAMENTO ML (Ajuste fino da taxa fixa 2026) ===
       if(currentPlatform === 'ml' && fSeller === 0) {
-        // Se o preço calculado caiu numa faixa menor, ajustamos a taxa e recalculamos
-        if(preco < 29) {
-          fixed = 6.25;
-        } else if(preco < 50) {
-          fixed = 6.50;
-        } else if(preco < 79) {
-          fixed = 6.75;
-        } else {
-          // Passou de 79, o frete vira obrigatório
-          fixed = 0;
-          // Aqui idealmente pediríamos o frete, mas para não quebrar o cálculo:
-          alert("Atenção: O preço sugerido passou de R$ 79. No Mercado Livre, você precisará pagar o frete grátis. Adicione o valor do frete no campo para corrigir o cálculo.");
-        }
-        // Recalcular com a taxa exata da faixa
+        if(preco < 29) { fixed = 6.25; } 
+        else if(preco < 50) { fixed = 6.50; } 
+        else if(preco < 79) { fixed = 6.75; } 
+        else { fixed = 0; alert("Atenção: Passou de R$ 79 (Frete Grátis Obrigatório). Insira o valor do frete."); }
         numerador = custo + (custo * (margem / 100)) + fixed + fSeller;
         preco = numerador / divisor;
       }
 
-      // === REFINAMENTO AMAZON (Comissão Mínima R$ 1.00) ===
       let valorComissao = preco * (comm / 100);
       if(currentPlatform === 'amazon' && valorComissao < 1.00) {
         valorComissao = 1.00;
-        // Recalcula preço considerando que a comissão virou um custo fixo de R$1
-        // Novo Numerador = Custo + Lucro + Fixed + Frete + 1.00 (Comissão Fixa)
-        // Novo Divisor = 1 - (Imposto / 100) -> Tiramos a comissão % da equação
         const divisorSemComm = 1 - (imposto / 100);
         numerador = custo + (custo * (margem / 100)) + fixed + fSeller + 1.00;
         preco = numerador / divisorSemComm;
       }
 
-      // Detalhamento Final
       const taxTotal = (currentPlatform === 'amazon' && valorComissao === 1.00) 
-                       ? (1.00 + fixed + fSeller) 
-                       : (preco * (comm / 100) + fixed + fSeller);
-                       
+                       ? (1.00 + fixed + fSeller) : (preco * (comm / 100) + fixed + fSeller);
       const taxImp = preco * (imposto / 100);
       const lucro = preco - custo - taxTotal - taxImp;
 
       document.getElementById('resPreco').innerText = preco.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
       document.getElementById('badgeLucro').innerText = `Lucro: ${lucro.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}`;
-      document.getElementById('badgeLucro').className = lucro > 0 ? '' : 'negative'; // Adicionar classe CSS se precisar
       document.getElementById('badgeLucro').style.background = lucro > 0 ? '#dcfce7' : '#fee2e2';
       document.getElementById('badgeLucro').style.color = lucro > 0 ? '#166534' : '#991b1b';
       
@@ -433,9 +422,7 @@
       if(fSeller > 0){
         rf.style.display='flex';
         document.getElementById('resFrete').innerText=fSeller.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-      } else {
-        rf.style.display='none';
-      }
+      } else { rf.style.display='none'; }
       
       document.getElementById('results').style.display='block';
     }
