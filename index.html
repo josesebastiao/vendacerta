@@ -9,11 +9,9 @@
   <meta name="theme-color" content="#020617">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="VendaCerta">
   
   <link rel="apple-touch-icon" href="icon-192.png">
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
@@ -22,73 +20,89 @@
       --secondary: #0f172a;
       --bg-dark: #020617;
       --card-bg: #ffffff;
-      /* Área segura para iPhones com Notch */
       --safe-area-bottom: env(safe-area-inset-bottom);
     }
 
-    * { 
-      box-sizing: border-box; 
-      font-family: 'Inter', sans-serif; 
-      -webkit-tap-highlight-color: transparent; /* Remove flash azul no toque */
-    }
+    * { box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
     
     body { 
-      margin: 0; 
-      background: #f1f5f9; 
-      color: #1e293b; 
-      overflow-x: hidden;
-      overscroll-behavior-y: none; /* Evita o "puxar para atualizar" do Chrome */
-      user-select: none; /* Sensação de App (não seleciona texto) */
+      margin: 0; background: #f1f5f9; color: #1e293b; 
+      overflow-x: hidden; overscroll-behavior-y: none; user-select: none; 
     }
+    input, select, textarea { user-select: text; }
 
-    /* Input pode ser selecionável */
-    input, select, textarea, .selectable { user-select: text; }
-
-    /* ================= TELA DE BLOQUEIO ================= */
+    /* ================= TELA DE VENDAS (LANDING PAGE) ================= */
     #lockScreen {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
       min-height: 100vh;
-      background: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
-      color: white; padding: 20px;
+      background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+      color: white; padding: 20px; overflow-y: auto;
       position: relative; z-index: 9999;
     }
 
-    .glass-card {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 24px; padding: 40px 24px;
-      width: 100%; max-width: 400px; text-align: center;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    .sales-container {
+      width: 100%; max-width: 480px; text-align: center;
+      padding-top: 20px; padding-bottom: 40px;
     }
 
+    /* Logo Animado */
+    .hero-logo { margin-bottom: 20px; animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    /* Textos de Impacto */
+    .headline {
+      font-size: 2rem; font-weight: 800; line-height: 1.1; margin-bottom: 10px;
+      background: linear-gradient(to right, #ffffff, #86efac);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .subheadline { color: #94a3b8; font-size: 1.1rem; margin-bottom: 30px; line-height: 1.5; }
+
+    /* Card de Dores vs Solução */
+    .pain-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; padding: 20px; margin-bottom: 30px; text-align: left;
+    }
+    .pain-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.95rem; color: #cbd5e1; }
+    .pain-item i { width: 20px; text-align: center; }
+    .check-green { color: #22c55e; }
+    .cross-red { color: #ef4444; }
+
+    /* Botão CTA Pulsante */
     .btn-buy {
       display: flex; align-items: center; justify-content: center; gap: 10px;
       background: var(--primary); color: #020617;
-      padding: 16px; border-radius: 16px;
-      font-weight: 800; text-decoration: none; font-size: 1.1rem;
-      width: 100%; margin-bottom: 25px;
+      padding: 18px; border-radius: 16px;
+      font-weight: 800; text-decoration: none; font-size: 1.2rem;
+      width: 100%; margin-bottom: 15px;
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
       animation: pulse 2s infinite;
+      transition: transform 0.2s;
     }
+    .btn-buy:active { transform: scale(0.96); }
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-      70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+      70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
       100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
     }
+    
+    .guarantee { font-size: 0.8rem; color: #64748b; margin-bottom: 40px; display: block; }
 
-    .features-grid { display: grid; grid-template-columns: 1fr; gap: 10px; text-align: left; }
-    .feature-item { 
-      background: rgba(255,255,255,0.05); padding: 12px; border-radius: 10px; 
-      font-size: 0.9rem; color: #cbd5e1; display: flex; align-items: center; gap: 10px; 
+    /* Grid de Funcionalidades */
+    .features-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: white; }
+    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .feature-box {
+      background: rgba(30, 41, 59, 0.6); padding: 15px; border-radius: 12px;
+      text-align: center; border: 1px solid rgba(255,255,255,0.05);
     }
+    .feature-box i { font-size: 1.5rem; color: var(--primary); margin-bottom: 8px; }
+    .feature-box h4 { margin: 0; font-size: 0.9rem; color: #f1f5f9; }
+    .feature-box p { margin: 4px 0 0 0; font-size: 0.75rem; color: #94a3b8; }
 
     /* ================= APP PRINCIPAL ================= */
     #app { 
       display: none; max-width: 600px; margin: 0 auto; 
-      padding: 20px 20px calc(20px + var(--safe-area-bottom)) 20px; /* Padding extra p/ iPhone */
+      padding: 20px 20px calc(20px + var(--safe-area-bottom)) 20px; 
     }
-    
-    header { text-align: center; margin-bottom: 20px; margin-top: 10px; }
     
     .card { background: white; border-radius: 24px; padding: 24px 20px; box-shadow: 0 10px 30px -5px rgba(0,0,0,0.05); }
 
@@ -96,21 +110,18 @@
     
     input, select {
       width: 100%; padding: 16px; border-radius: 14px; border: 1px solid #e2e8f0;
-      font-size: 16px; /* Evita zoom no iOS */
-      color: var(--secondary); outline: none; background: #fff; appearance: none;
+      font-size: 16px; color: var(--secondary); outline: none; background: #fff; appearance: none;
     }
     .money-input { padding-left: 45px; }
-    .input-wrapper span { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-weight: 600; }
     .input-wrapper { position: relative; }
+    .input-wrapper span { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-weight: 600; }
 
-    /* Plataformas - Botões Maiores para Toque */
     .platform-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
     .p-btn {
       padding: 16px 10px; border: 1px solid #e2e8f0; border-radius: 16px; background: #f8fafc;
       cursor: pointer; font-weight: 600; color: #64748b; display: flex; flex-direction: column; 
       align-items: center; justify-content: center; gap: 8px; transition: all 0.2s;
     }
-    .p-btn i { font-size: 1.2rem; margin-bottom: 2px; }
     .p-btn.active { border-color: var(--primary); background: #f0fdf4; color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15); }
     
     .btn-calc {
@@ -121,36 +132,80 @@
 
     #results { display: none; margin-top: 30px; border-top: 2px dashed #e2e8f0; padding-top: 30px; animation: slideUp 0.4s ease; }
     
-    /* Painel Admin */
     #adminPanel { margin-top: 40px; padding: 20px; background: #fff; border-radius: 16px; border: 2px dashed #cbd5e1; }
     
     @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
-<div class="logo-area" style="margin-bottom: 20px;">
-  <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 10px 20px rgba(34,197,94,0.3));">
-    <rect width="100" height="100" rx="24" fill="#22c55e"/>
-    <path d="M25 65L40 50L55 65L75 40" stroke="#020617" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M70 40H75V46" stroke="#020617" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="30" cy="30" r="5" fill="#020617" fill-opacity="0.2"/>
-    <circle cx="70" cy="70" r="5" fill="#020617" fill-opacity="0.2"/>
-  </svg>
-</div>
+
+  <div id="lockScreen">
+    <div class="sales-container">
+      
+      <div class="hero-logo">
+        <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 20px rgba(34,197,94,0.4));">
+          <rect width="100" height="100" rx="24" fill="#22c55e"/>
+          <path d="M25 65L40 50L55 65L75 40" stroke="#020617" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M70 40H75V46" stroke="#020617" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <h1 class="headline">Pare de vender<br>sem ver a cor<br>do dinheiro.</h1>
+      <p class="subheadline">A calculadora automática para Shopee, Mercado Livre e Amazon. Saiba seu lucro real antes de anunciar.</p>
+
+      <div class="pain-card">
+        <div class="pain-item"><i class="fa-solid fa-xmark cross-red"></i> Adeus planilhas confusas</div>
+        <div class="pain-item"><i class="fa-solid fa-xmark cross-red"></i> Chega de prejuízo com frete</div>
+        <div class="pain-item"><i class="fa-solid fa-check check-green"></i> <strong>Taxas 2025 Atualizadas</strong></div>
+        <div class="pain-item"><i class="fa-solid fa-check check-green"></i> <strong>Cálculo Reverso de Preço</strong></div>
+      </div>
+
+      <a href="https://wa.me/5527999553035?text=Olá,%20vi%20o%20VendaCerta%20e%20quero%20liberar%20meu%20acesso!" 
+         target="_blank" class="btn-buy">
+         QUERO ACESSAR AGORA <i class="fa-brands fa-whatsapp"></i>
+      </a>
+      <span class="guarantee"><i class="fa-solid fa-shield-halved"></i> Compra segura e acesso imediato</span>
+
+      <h3 class="features-title">Tudo o que você precisa:</h3>
+      <div class="features-grid">
+        <div class="feature-box">
+          <i class="fa-solid fa-store"></i>
+          <h4>Multi-Plataforma</h4>
+          <p>Shopee, ML, Amazon, Magalu</p>
+        </div>
+        <div class="feature-box">
+          <i class="fa-solid fa-sack-dollar"></i>
+          <h4>Lucro Líquido</h4>
+          <p>Desconta impostos e taxas</p>
+        </div>
+        <div class="feature-box">
+          <i class="fa-solid fa-truck-fast"></i>
+          <h4>Simulador ML</h4>
+          <p>Alerta de Frete > R$79</p>
+        </div>
+        <div class="feature-box">
+          <i class="fa-solid fa-mobile-screen"></i>
+          <h4>App Nativo</h4>
+          <p>Instale no seu celular</p>
+        </div>
+      </div>
+
+      <footer style="margin-top: 40px; color: #475569; font-size: 0.8rem;">
+        <p>&copy; 2025 VendaCerta. Todos os direitos reservados.</p>
+      </footer>
+    </div>
+  </div>
 
   <div id="app">
-   <header style="display: flex; flex-direction: column; align-items: center; margin-bottom: 25px;">
-  <svg width="180" height="50" viewBox="0 0 180 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="0" y="5" width="40" height="40" rx="10" fill="#22c55e"/>
-    <path d="M10 28L16 22L22 28L30 18" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M28 18H30V20" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M12 35H28" stroke="white" stroke-width="2" stroke-linecap="round" stroke-opacity="0.5"/>
-    
-    <text x="50" y="32" font-family="'Inter', sans-serif" font-weight="800" font-size="22" fill="#0f172a">Venda<tspan fill="#22c55e">Certa</tspan></text>
-  </svg>
-  
-  <p style="color: #64748b; font-size: 0.9rem; margin-top: 5px;">Calculadora Premium</p>
-</header>
+    <header style="text-align: center; margin-bottom: 25px;">
+        <svg width="140" height="40" viewBox="0 0 180 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="5" width="40" height="40" rx="10" fill="#22c55e"/>
+            <path d="M10 28L16 22L22 28L30 18" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M28 18H30V20" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="50" y="32" font-family="'Inter', sans-serif" font-weight="800" font-size="22" fill="#0f172a">Venda<tspan fill="#22c55e">Certa</tspan></text>
+        </svg>
+    </header>
+
     <div class="card">
       <div class="platform-selector">
         <div class="p-btn active" onclick="setPlatform('shopee')" data-platform="shopee">
@@ -196,7 +251,7 @@
 
       <div id="results">
         <div style="text-align: center; margin-bottom: 20px;">
-          <small style="color:#64748b">Preço de Venda</small>
+          <small style="color:#64748b">Venda por este preço:</small>
           <h1 id="resPreco" style="font-size: 2.5rem; color:#0f172a; margin: 5px 0;">R$ 0,00</h1>
           <span id="badgeLucro" style="background:#dcfce7; color:#166534; padding: 5px 15px; border-radius: 20px; font-weight:700; font-size:0.9rem;">Lucro: R$ 0,00</span>
         </div>
@@ -211,31 +266,32 @@
 
     <div id="adminPanel" style="display:none;">
       <h3>Painel Admin</h3>
-      <input type="text" id="tokenName" placeholder="Nome do Cliente" onkeyup="generateLink()" style="margin-bottom:10px;">
-      <input type="text" id="finalLink" readonly onclick="copyLink()" style="background:#f1f5f9; color:#64748b;">
+      <input type="text" id="tokenName" placeholder="Nome do Cliente" onkeyup="generateLink()" style="margin-bottom:10px; width: 100%; padding: 10px;">
+      <input type="text" id="finalLink" readonly onclick="copyLink()" style="background:#f1f5f9; color:#64748b; width: 100%; padding: 10px;">
+      <small>Clique no link para copiar</small>
     </div>
 
-    <footer style="text-align: center; margin-top: 40px; color: #94a3b8; font-size: 0.8rem;">VendaCerta Mobile v3.0</footer>
+    <footer style="text-align: center; margin-top: 40px; color: #94a3b8; font-size: 0.8rem;">VendaCerta Mobile v4.0</footer>
   </div>
 
   <script>
-    // === SERVICE WORKER (PWA) ===
+    // === SERVICE WORKER ===
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
-          .then(reg => console.log('SW registrado!', reg))
           .catch(err => console.log('SW falhou:', err));
       });
     }
 
-    // === LÓGICA DO APP (Mesma de antes) ===
+    // === CONFIGURAÇÃO ===
     const FEES={shopee:{padrao:{comm:14,fixed:3},frete_gratis:{comm:20,fixed:3}},ml:{classico:{comm:11.5,fixed:6},premium:{comm:16.5,fixed:6}},amazon:{individual:{comm:15,fixed:2},profissional:{comm:15,fixed:0}},magalu:{padrao:{comm:16,fixed:3}}};
     const VALID_TOKENS=["ADMIN","LIBERADO123","CLIENTEVIP","TESTE"];
-    let currentPlatform='shopee';
     
-    // Check Acesso
+    let currentPlatform='shopee';
     const urlParams=new URLSearchParams(window.location.search);
     const userToken=urlParams.get('token');
+
+    // === LÓGICA DE ACESSO ===
     if(userToken==='ADMIN'){
       document.getElementById('lockScreen').style.display='none';
       document.getElementById('app').style.display='block';
@@ -244,6 +300,8 @@
     } else if(VALID_TOKENS.includes(userToken)){
       document.getElementById('lockScreen').style.display='none';
       document.getElementById('app').style.display='block';
+    } else {
+      // Mantém na tela de vendas (lockScreen)
     }
 
     function setPlatform(p){
